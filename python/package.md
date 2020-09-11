@@ -145,3 +145,7 @@ python3 -m pip install --user --upgrade twine
 python3 -m twine upload --repository testpypi dist/*
 
 ```
+
+## 参考项目
+- [BaiduMapAPI](https://github.com/shikanon/BaiduMapAPI/blob/master/setup.py)
+- [tushare](https://github.com/waditu/tushare/blob/master/tushare/stock/trading.py)
