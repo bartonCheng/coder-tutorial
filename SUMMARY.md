@@ -9,7 +9,7 @@
 ---
 ---
 <!-- nginx 系列 -->
-- [死磕nginx](nginx/README.md)
+- [nginx系列](nginx/README.md)
   - [nginx配置文件](./nginx/nginx-setting.md)
 ---
 ---
