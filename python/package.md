@@ -1,27 +1,32 @@
 # 开发开源自己的 Python 包
 
-## 前言 
-[官方使用文档 - 发布一个包](https://packaging.python.org/tutorials/packaging-projects/)
-[官方使用文档 - 配置项目的解释](https://packaging.python.org/guides/distributing-packages-using-setuptools/)
-想要写出自己的一个包，大概分为五步
+## 前言
+
+- [官方使用文档 - 发布一个包](https://packaging.python.org/tutorials/packaging-projects/)
+- [官方使用文档 - 配置项目的解释](https://packaging.python.org/guides/distributing-packages-using-setuptools/)
+
+### 五步
+
 - 项目创建
 - 搭建虚拟运行环境
 - 编写项目代码
 - 编写安装脚本
-- 上传PyPi
+- 上传 PyPi
 
 ## 项目创建
 
-- 正常的创建git项目
+- 正常的创建 git 项目
 - 选择.gitignore python
 - 选择开源协议，可选择 MIT
 
 ## 搭建虚拟环境
+
 - 构建虚拟环境使用的是 [Virtualenv](https://virtualenv.pypa.io/en/latest/)
 
 ### 使用方法
 
 - [python 官方使用文档](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
 ```bash
 # 安装
 # 最新版本的建议使用这种安装方式，不推荐pip3 install ***
