@@ -16,7 +16,8 @@
 
 ---
 <!-- Ubuntu 系列 -->
-- [ubuntu server 20.04开发参考](ubuntu/ubuntu-server.md)
+- [Ubuntu系列](ubuntu/README.md)
+  - [ubuntu server 20.04开发参考](ubuntu/ubuntu-server.md)
 ---
 ---
 <!-- Mysql -->
