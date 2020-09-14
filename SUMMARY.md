@@ -12,6 +12,18 @@
 - [nginx系列](nginx/README.md)
   - [nginx配置文件](./nginx/nginx-setting.md)
 ---
+
+
+---
+<!-- Ubuntu 系列 -->
+- [ubuntu server 20.04开发参考](ubuntu/ubuntu-server.md)
+---
+---
+<!-- Mysql -->
+- [Mysql系列](mysql/mac下安装使用mysql.md)
+---
+
+
 ---
 <!-- 文档 -->
 - [gitbook 中文文档](https://chrisniael.gitbooks.io/gitbook-documentation/content/index.html)
