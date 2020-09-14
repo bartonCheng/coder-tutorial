@@ -32,7 +32,9 @@
   - [mac 下安装使用](./mysql/mac下安装使用mysql.md)
 
 ---
-
+<!-- git 系列 -->
+- [Git && Github 系列](./github/README.md)
+  - [git 的使用](./github/git-use.md)
 <!-- 文档 -->
 
 - [文档 系列](books/README.md)
