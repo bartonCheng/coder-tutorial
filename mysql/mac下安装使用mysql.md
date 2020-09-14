@@ -12,9 +12,6 @@ brew link --force mysql@5.7
 # 启动mysql
 brew services start mysql@5.7
 
-# 执行安全设置-设置密码
-mysql_secure_installation
-
 # 输出到环境变量
 echo 'export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"' >> ~/.zshrc
 ```
