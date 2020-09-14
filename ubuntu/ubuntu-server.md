@@ -57,6 +57,34 @@ sudo netplan generate
 sudo netplan apply
 ```
 
+## 树莓派设置 wifi 连接配置文件
+
+- 树莓派需要先使用网线进行连接
+
+```bash
+# 查看配置文件
+cat /etc/netplan/50-cloud-init.yaml
+
+# This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init's
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    renderer: NetworkManager
+    ethernets:
+        eth0:
+            dhcp4: true
+            optional: true
+    wifis:
+      wlan0:
+        dhcp4: true
+        access-points:
+          "CU_grN4_BK":
+            password: "ta9at4cd"
+    version: 2
+```
+
 ## 使用 Ubuntu 笔记本盒盖不影响系统
 
 ```bash
@@ -152,6 +180,35 @@ netstat -ap | grep 6006
 
 # 关闭使用这个端口的程序
 sudo kill -9 PID号
+```
+
+## 树莓派使用网线进行电脑连接
+
+- 使用 win10 64 位
+- 网线
+- 上电树莓派
+
+### 使用用 Advanced IP Scanner
+
+- 这个软件是免费的
+- 使用软件扫描，找到 192.168.137.154 或者 192.168.137.\*
+
+### 配置网络连接
+
+- 配置 WLAN 的属性-共享-使用允许其他用户共享
+- 配置以太网 - 属性
+- ip 192.168.137.154 -这里需要和扫描软件的 IP 一致
+- 子网掩码 255.255.255.0
+- DNS 的服务器 192.168.137.1
+
+### 连接
+
+```bash
+# 查看本地连接
+arp -a
+
+# 找到树莓派的ip 192.168.137.52
+# 使用xshell连接
 ```
 
 ## 使用
