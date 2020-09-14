@@ -24,9 +24,9 @@
 
 <!-- Ubuntu 系列 -->
 
-* [Ubuntu 系列](ubuntu/README.md)
-  * [ubuntu server 20.04 开发参考](ubuntu/ubuntu-server.md)
-  * [ngrok 搭建自己的转发服务器](ubuntu/ngrok-server.md)
+- [Ubuntu 系列](ubuntu/README.md)
+  - [ubuntu server 20.04 开发参考](ubuntu/ubuntu-server.md)
+  - [ubuntu server 20.04 开发参考](ubuntu/ubuntu-server.md)
 
 ---
 
