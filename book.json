@@ -7,4 +7,9 @@
     "pdf": {
             "fontFamily": "等线"
         }
+    },
+    "links" : {
+        "sidebar" : {
+            "Home" : "https://github.com/bartonCheng/coder-tutorial"
+        }
     }
