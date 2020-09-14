@@ -16,10 +16,6 @@
 - 注意，这里都是 a 记录类型的解析
 - 只有解析成功，才能配置通
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg"
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
-
 ### 使用脚本一键安装
 
 [ngrokd-server](https://github.com/bartonCheng/ngrokd-server)

@@ -11,14 +11,10 @@
 
 ---
 
----
-
 <!-- nginx 系列 -->
 
 - [Nginx 系列](nginx/README.md)
   - [nginx 配置文件](./nginx/nginx-setting.md)
-
----
 
 ---
 
@@ -30,14 +26,10 @@
 
 ---
 
----
-
 <!-- Mysql -->
 
 - [Mysql 系列](mysql/README.md)
   - [mac 下安装使用](./mysql/mac下安装使用mysql.md)
-
----
 
 ---
 
