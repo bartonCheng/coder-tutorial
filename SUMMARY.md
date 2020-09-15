@@ -49,7 +49,7 @@
 
 <!-- 文档 -->
 
-- [文档 系列](books/README.md)
+- [文档 系列](book/README.md)
   - [gitbook 中文文档](https://chrisniael.gitbooks.io/gitbook-documentation/content/index.html)
 
 ---
