@@ -219,3 +219,112 @@ arp -a
 # ctrl + z 可以暂时退出屏幕
 # fg 命令可以调回窗口
 ```
+
+## 解决 ifconfig 不能使用
+
+```bash
+#这是新的替代工具，包含：arp,ifconfig,netstat.rarp,nameif,route
+sudo apt-get install net-tools
+```
+
+## 清理系统
+
+```bash
+#清理已经卸载的缓存包
+$ sudo apt autoclean
+#清理软件安装包
+$ sudo apt clean
+# 清理系统孤儿包
+$ sudo apt autoremove
+# 更新软件
+$ sudo apt update
+#更新安装
+$ sudo apt upgrade
+```
+
+## 文件系统操作
+
+```bash
+# 查看内存剩余
+free -m
+
+# 查看进程
+ps
+
+# 查看占用内存前三
+top
+
+# 检测cpu
+vmstat 2 3
+
+# 查看当前空间大小
+df -h
+
+```
+
+## 文件/角色权限
+
+- 文件
+
+```bash
+# 文件权限
+$ chmod -R 755 files
+$ chmod -R 644 files
+$ chmod -R a+x files
+$ chmod -R u+x files
+$ chmod 755 file1 file2
+$ chmod 700 file1 file2
+$ chmod 644 file1 file3
+$ chmod 600 file1 file3
+
+# 操作文件内容
+$ cat file1
+$ cat file1 | grep sometings
+# 写入到文件，ctrl+D结束
+$ cat >> file2
+$ cat file2
+#合并文件
+$ cat file1 file 2 >> file3
+# 分页查看文件内容
+$ more file1 file2
+$ less file1 file2
+# 命令输出到文件
+$ ls -al > out.txt
+```
+
+- 角色
+
+```bash
+#角色
+$ chown -R www-data:www-data files
+$ chown -R apache:apache files
+$ chwon www:www file1 file3
+$ chown kevin:kevin /var/src/*
+
+# 查看当前用户
+id
+users
+
+```
+
+## 创建/复制/删除
+
+```bash
+#  创建一个文件夹
+$ mkdir Keivn
+#创建一个或者多个文件
+$ touch file1 file2 file3
+
+#复制文件
+$ cp orifile1 desfile2
+
+#重命名
+$ mv file1 file2
+
+#删除文件
+$ rm  file1.*
+$ rm  file
+# 删除文件夹
+$ rmdir files
+$ rmdir file.*
+```

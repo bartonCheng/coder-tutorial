@@ -61,6 +61,13 @@ iface wlan0 inet manual
 wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
 
+# wlan1
+auto wlan1
+allow-hotplug wlan1
+iface wlan1 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
 # 重新启动
 sudo reboot
 ```
