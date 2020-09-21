@@ -8,4 +8,4 @@
 
 ## 使用网线连接树莓派
 
-- [参考树莓派设置](./ubuntu-server)
+- [参考树莓派设置](./ubuntu-server.md)
