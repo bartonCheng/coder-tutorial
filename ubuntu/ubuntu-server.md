@@ -328,3 +328,15 @@ $ rm  file
 $ rmdir files
 $ rmdir file.*
 ```
+
+## ssh/sftp 使用
+
+```bash
+# 使用pem私钥文件登录
+# 需要把私钥文件设为只读
+chmod 400 .manager.pem
+ssh -i .manager.pem root@39.100.64.40
+
+# sftp 连接远程
+sftp -i .manager.pem root@39.100.64.40
+```
