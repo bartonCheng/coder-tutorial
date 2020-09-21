@@ -23,6 +23,9 @@ deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
 sudo apt update
 sudo apt upgrade
 
+sudo apt clean
+sudo apt autoclean
+
 ```
 
 ## 设置日期
@@ -35,7 +38,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai    /etc/localtime
 sudo ntpdate cn.pool.ntp.org
 ```
 
-# kali 设置 wifi 连接
+## kali 设置 wifi 连接
 
 ```bash
 # 创建连接文件
@@ -60,4 +63,14 @@ iface default inet dhcp
 
 # 重新启动
 sudo reboot
+```
+
+## 修改密码
+
+```bash
+# 修改用户kali密码
+sudo passwd kali
+
+# 修改根密码
+sudo passwd
 ```
