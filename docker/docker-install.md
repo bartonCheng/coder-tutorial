@@ -1,8 +1,9 @@
-## Docker 使用参考
+## 使用参考
 
-### 安装 Centos 7.0
+- 本文档使用的是 Ubuntu Server 20.04.1 LTS
+- 配置参考[ubuntu 指导](../ubuntu/ubuntu-server.md)
 
-#### 配置
+### centos
 
 ```bash
 # 因为装的是新的系统所以先 升级最新依赖
@@ -12,100 +13,22 @@ uname -r
 # docker 安装系统要求内核是 3.1 以上
 # 【命令】查看系统版本
 cat /etc/os-release
-# 结果
-NAME="CentOS Linux"
-VERSION="7 (Core)"
-ID="centos"
-ID_LIKE="rhel fedora"
-VERSION_ID="7"
-PRETTY_NAME="CentOS Linux 7 (Core)"
-ANSI_COLOR="0;31"
-CPE_NAME="cpe:/o:centos:centos:7"
-HOME_URL="https://www.centos.org/"
-BUG_REPORT_URL="https://bugs.centos.org/"
-
-CENTOS_MANTISBT_PROJECT="CentOS-7"
-CENTOS_MANTISBT_PROJECT_VERSION="7"
-REDHAT_SUPPORT_PRODUCT="centos"
-REDHAT_SUPPORT_PRODUCT_VERSION="7"
 ```
 
-### 安装
+### ubuntu
+
+```bash
+# 【命令】查看内核版本
+uname -r
+# 【命令】查看系统版本
+cat /etc/os-release
+```
+
+## docker 安装
 
 - [Docker 帮助文档](https://docs.docker.com/engine/install/)
 
-```bash
-# 卸载旧的版本
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
-# 安装依赖包
-sudo yum install -y yum-utils
-# 设置镜像仓库
-sudo yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-# 使用国内的镜像【推荐】
-sudo yum-config-manager \
-    --add-repo \
-      http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-# 更新系统镜像缓存
-yum makecache fast
-# 按照docker 相应的 docker-ce ce是社区版本ee商业版本
-sudo yum install docker-ce docker-ce-cli containerd.io
-# 启动docker
-sudo systemctl start docker
-# 查看docker 版本信息
-docker version
-# 结果
-Client: Docker Engine - Community
- Version:           19.03.9
- API version:       1.40
- Go version:        go1.13.10
- Git commit:        9d988398e7
- Built:             Fri May 15 00:25:27 2020
- OS/Arch:           linux/amd64
- Experimental:      false
-
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.9
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.13.10
-  Git commit:       9d988398e7
-  Built:            Fri May 15 00:24:05 2020
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.2.13
-  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
- runc:
-  Version:          1.0.0-rc10
-  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-# 测试helloworld
-sudo docker run hello-world
-# 查看本地镜像
-docker images
-# 结果
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-hello-world         latest              bf756fb1ae65        4 months ago        13.3kB
-
-# 卸载docker依赖 -- 如果需要卸载才执行
-sudo yum remove docker-ce docker-ce-cli containerd.io
-
-# 删除目录 也是docker的默认工作路径
-sudo rm -r -f /var/lib/docker
-```
-
-### 配置阿里云镜像加速
+## 配置阿里云镜像加速
 
 - [登陆阿里云 容器服务](https://cr.console.aliyun.com/cn-qingdao/instances/mirrors)
 - 找到镜像加速地址
@@ -1237,8 +1160,7 @@ hello.java
 #### DockerFIle 的构建过程
 
 > 指令
-> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529055854149-1573559445.png)
-> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529060635043-1928383007.png)
+> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529055854149-1573559445.png) > ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529060635043-1928383007.png)
 
 - 每个关键字必须大写
 - 执行从上到下
