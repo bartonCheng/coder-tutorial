@@ -1,9 +1,8 @@
-## 使用参考
+## Docker 使用参考
 
-- 本文档使用的是 Ubuntu Server 20.04.1 LTS
-- 配置参考[ubuntu 指导](../ubuntu/ubuntu-server.md)
+### 安装 Centos 7.0
 
-### centos
+#### 配置
 
 ```bash
 # 因为装的是新的系统所以先 升级最新依赖
@@ -13,22 +12,100 @@ uname -r
 # docker 安装系统要求内核是 3.1 以上
 # 【命令】查看系统版本
 cat /etc/os-release
+# 结果
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
 ```
 
-### ubuntu
-
-```bash
-# 【命令】查看内核版本
-uname -r
-# 【命令】查看系统版本
-cat /etc/os-release
-```
-
-## docker 安装
+### 安装
 
 - [Docker 帮助文档](https://docs.docker.com/engine/install/)
 
-## 配置阿里云镜像加速
+```bash
+# 卸载旧的版本
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+# 安装依赖包
+sudo yum install -y yum-utils
+# 设置镜像仓库
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+# 使用国内的镜像【推荐】
+sudo yum-config-manager \
+    --add-repo \
+      http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# 更新系统镜像缓存
+yum makecache fast
+# 按照docker 相应的 docker-ce ce是社区版本ee商业版本
+sudo yum install docker-ce docker-ce-cli containerd.io
+# 启动docker
+sudo systemctl start docker
+# 查看docker 版本信息
+docker version
+# 结果
+Client: Docker Engine - Community
+ Version:           19.03.9
+ API version:       1.40
+ Go version:        go1.13.10
+ Git commit:        9d988398e7
+ Built:             Fri May 15 00:25:27 2020
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.9
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       9d988398e7
+  Built:            Fri May 15 00:24:05 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+# 测试helloworld
+sudo docker run hello-world
+# 查看本地镜像
+docker images
+# 结果
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              bf756fb1ae65        4 months ago        13.3kB
+
+# 卸载docker依赖 -- 如果需要卸载才执行
+sudo yum remove docker-ce docker-ce-cli containerd.io
+
+# 删除目录 也是docker的默认工作路径
+sudo rm -r -f /var/lib/docker
+```
+
+### 配置阿里云镜像加速
 
 - [登陆阿里云 容器服务](https://cr.console.aliyun.com/cn-qingdao/instances/mirrors)
 - 找到镜像加速地址
@@ -51,28 +128,20 @@ sudo systemctl restart docker
 
 ## 底层原理
 
-- Docker 是由 Server -Cli 两个部分 Docker-cli 发送指令给 Docker-Server 执行操作。
+### Docker 是怎么工作的
 
-## Docker 常用命令
+Docker 是由 Server -Cli 两个部分 Docker-cli 发送指令给 Docker-Server 执行操作。
 
-### 帮助命令
-
-```bash
-# 查看命令信息
-docker commnand --help
-# 详细信息
-docker info
-# docker 概要信息
-docker version
-# 查看容器日志
-docker logs 容器id
-# 查看容器的详细配置
-dokcer inspect 容器id
-```
-
-### 镜像命令
+### Docker 常用命令
 
 ```bash
+# 帮助命令
+docker commnand --help // 查看命令信息
+docker info // docker 详细信息
+docker version // docker 概要信息
+
+# 镜像命令
+
 # 容器命令
 docker run -it -d -p 8080:80 -v /local/myfiles:/etc/local -e APP_KEY=TRUE --name nginx01 nginx /bin/bash
 -it 交互
@@ -80,7 +149,18 @@ docker run -it -d -p 8080:80 -v /local/myfiles:/etc/local -e APP_KEY=TRUE --name
 -e 传递变量
 -p 指定端口
 -v 指定数据卷
-# 查看本地主机的所有镜像
+
+docker logs 容器id # 查看容器日志
+dokcer inspect 容器id # 查看容器的详细配置
+```
+
+#### [docker 帮助文档](https://docs.docker.com/reference/)
+
+### 镜像命令
+
+#### 查看本地主机的所有镜像
+
+```bash
 docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 hello-world         latest              bf756fb1ae65        4 months ago        13.3kB
@@ -95,9 +175,43 @@ SIZE 镜像的大小
 -q 只显示镜像id
 ```
 
-### [docker 帮助文档](https://docs.docker.com/reference/)
+#### 搜索镜像
 
-### 指定版本下载
+```bash
+docker search mysql
+NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+mysql                             MySQL is a widely used, open-source relation…   9553                [OK]
+mariadb                           MariaDB is a community-developed fork of MyS…   3471                [OK]
+mysql/mysql-server                Optimized MySQL Server Docker images. Create…   700                                     [OK]
+
+# 选项
+-f=STARS=3000 通过收藏过滤
+```
+
+#### 拉取命令
+
+```bash
+docker pull mysql
+Using default tag: latest # 默认使用最新的版本
+latest: Pulling from library/mysql
+afb6ec6fdc1c: Pull complete # 分层下载 docker image的核心
+0bdc5971ba40: Pull complete
+97ae94a2c729: Pull complete
+f777521d340e: Pull complete
+1393ff7fc871: Pull complete
+a499b89994d9: Pull complete
+7ebe8eefbafe: Pull complete
+597069368ef1: Pull complete
+ce39a5501878: Pull complete
+7d545bca14bf: Pull complete
+211e5bb2ae7b: Pull complete
+5914e537c077: Pull complete
+Digest: sha256:a31a277d8d39450220c722c1302a345c84206e7fd4cdb619e7face046e89031d # 签名信息
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest # 真实地址 === docker pull mysql
+```
+
+#### 指定版本下载
 
 ```bash
 docker pull mysql:5.7
@@ -118,19 +232,44 @@ Status: Downloaded newer image for mysql:5.7
 docker.io/library/mysql:5.7
 ```
 
-### 删除镜像
+#### 删除镜像
 
 ```bash
 docker rmi -f a4fdfd462add
+Untagged: mysql:5.7
+Untagged: mysql@sha256:d16d9ef7a4ecb29efcd1ba46d5a82bda3c28bd18c0f1e3b86ba54816211e1ac4
+Deleted: sha256:a4fdfd462add8e63749aa08ff0044b13d342a042965f1ec6744586cda10dfce9
+Deleted: sha256:637f0ff7e591e53fe997c634cf10e63ab810dd1d6cb587ce46a57f753c36bdbf
+Deleted: sha256:65ba4d5ac7eb5218cfb4be1e7807584425c19f47606bc1e6d53e050d480d9581
+Deleted: sha256:7d0236d50948d993a686c69889c6f016a8da89b8557c5e0eaf6af145ea5877cb
+Deleted: sha256:a6219b1270405f43892a7a12895ae1e0ccff307d162cf0025df3ed87f511754b
 ```
 
-### 批量删除
+#### 批量删除
 
 ```bash
 docker rmi -f $(docker images -qa)
+Untagged: mysql:latest
+Untagged: mysql@sha256:a31a277d8d39450220c722c1302a345c84206e7fd4cdb619e7face046e89031d
+Deleted: sha256:30f937e841c82981a9a6363f7f6f35ed6b9d5e3f16df50a72207e4a2a389983f
+Deleted: sha256:8a5e032615340d8936e0e3707a39ce3da51dc952368176818f879e2f868b535b
+Deleted: sha256:c74673a735ca31b9b5162808ab451a8b20876a15e16a7899f2101f3c9b82df60
+Deleted: sha256:430365c8e22a9207dca4638c523dc82163bca3ab8a335a71147af41d1551561f
+Deleted: sha256:1ede41b1dbec1a5e4385200b62283ffb25c425275530ea9e9cc36b921186cd08
+Deleted: sha256:2f6badb9fd9965261d3463591f8af4afddf5f141456de83dc994690ae64b34eb
+Deleted: sha256:37803884320881cd931c77dea2ee4d8a7231dfed5a02dc595e6046ffacfa6e1b
+Deleted: sha256:cefc9066dc1aa84f6cddead1bb5a8c590e8368d56fb65694e8783d70791bec20
+Deleted: sha256:3bfbd2dd4507386ce56fd731b3c97d10bc058e6aa478f901466da69108db50e1
+Deleted: sha256:9652363dd4c1146b3f9a519800a9f379adf0b6c4f9aece1ffe965dce5f52a8ca
+Deleted: sha256:0ed190016efa0f19bcc5f1d66ffffc7b09716f3c57bcc5de74a4ce217af92278
+Deleted: sha256:8399fb13d72603fdc8781075672ee25fedf8384f6721639a70dd3533250ed9e4
+Deleted: sha256:ffc9b21953f4cd7956cdf532a5db04ff0a2daa7475ad796f1bad58cfbaf77a07
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:6a65f928fb91fcfbc963f7aa6d57c8eeb426ad9a20c7ee045538ef34847f44f1
+Deleted: sha256:bf756fb1ae65adf866bd8c456593cd24beb6a0a061dedf42b26a993176745f6b
 ```
 
-## 容器命令
+### 容器命令
 
 > 有了镜像才能创建容器
 
@@ -139,7 +278,7 @@ docker rmi -f $(docker images -qa)
 docker pull centos
 ```
 
-### 新建容器并启动
+#### 新建容器并启动
 
 ```bash
 docker run --help
@@ -157,7 +296,7 @@ docker run --help
 exit 退出容器
 ```
 
-### 列出所有运行的容器
+#### 列出所有运行的容器
 
 ```bash
 docker ps
@@ -173,7 +312,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 3d56e66407fc        bf756fb1ae65        "/hello"            3 hours ago         Exited (0) 3 hours ago                          exciting_joliot
 ```
 
-### 删除容器
+#### 删除容器
 
 ```bash
 docker rm 容器id
@@ -181,14 +320,12 @@ docker rm -f $(docker ps -aq )
 docker ps -aq |xargs docker rm # 删除所有容器
 ```
 
-### 退出容器
+#### 退出容器
 
 ```bash
 exit 直接退出
 Ctrl +p +q 容器不停止退出
 ```
-
-### 容器常用
 
 ```bash
 # 启动容器
@@ -213,14 +350,16 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-### 后台启动
+### 常用的进阶命令
+
+#### 后台启动
 
 ```bash
 docker run -d centos
 # 如果容器没有前台应用去使用它，容器就会自杀。所以后天启动需要有其他容器配合
 ```
 
-### 查看日志
+#### 查看日志
 
 ```bash
 docker logs -f -t --tail 10 容器id
@@ -239,7 +378,7 @@ bafdbd85ecbf        centos              "/bin/sh -c 'while t…"   6 seconds ago
 2020-05-28T06:10:13.905012761Z 123456
 ```
 
-### 查看容器中的进程信息
+#### 查看容器中的进程信息
 
 ```bash
 docker top 容器id
@@ -249,7 +388,7 @@ root                25916               25887               0                   
 root                26213               25916               0                   14:13               ?                   00:00:00            /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 1
 ```
 
-### 查看镜像源配置数据
+#### 查看镜像源配置数据
 
 ```bash
 docker inspect 容器id
@@ -467,7 +606,7 @@ docker inspect baf
 ]
 ```
 
-### 进入当前运行的容器
+#### 进入当前运行的容器
 
 ```bash
 容器通常是使用后台运行的，所以要进入容器
@@ -479,7 +618,7 @@ docker exec -it 容器id /bin/bash
 docker attach 容器id
 ```
 
-### 从容器内文件拷贝到容器外
+#### 从容器内文件拷贝到容器外
 
 ```bash
 docker cp 容器id:容器内路径 主机内路径
@@ -492,6 +631,10 @@ hello.java
 
 # 还可以使用数据卷的功能，容器内和主机同步
 ```
+
+### Docker 小结
+
+![img](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200528150109512-212016618.png)
 
 ## 运行案例
 
@@ -1094,7 +1237,8 @@ hello.java
 #### DockerFIle 的构建过程
 
 > 指令
-> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529055854149-1573559445.png) > ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529060635043-1928383007.png)
+> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529055854149-1573559445.png)
+> ![](https://img2020.cnblogs.com/blog/2007691/202005/2007691-20200529060635043-1928383007.png)
 
 - 每个关键字必须大写
 - 执行从上到下
