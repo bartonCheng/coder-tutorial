@@ -5,6 +5,7 @@
 - PHP + Nginx + Mariadb + Redis + Swoole
 - Docker-compose
 - [Docker-compose 文档地址](https://docs.docker.com/compose/)
+- 所有的文件已经在 git 里写成脚本，[脚本地址](https://github.com/bartonCheng/docker-php7.4)
 
 ## Docker Compose 安装
 
