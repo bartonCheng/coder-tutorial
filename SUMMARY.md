@@ -45,8 +45,8 @@
 
 - [Docker 系列](docker/README.md)
   - [dokcer 安装使用](docker/docker-install.md)
-  - [使用 Docker 构建 PHP7.4 + Swoole + Redis 镜像](docker/ubuntu-docker.md)
-  - [使用 Docker-compose 编排一个 PHP + Nginx + Mariadb + Redis + Swoole 环境](docker/ubuntu-psmrn.md)
+  - [使用 Docker 构建镜像](docker/ubuntu-docker.md)
+  - [使用 Docker-compose 编排环境](docker/ubuntu-psmrn.md)
 
 ---
 
