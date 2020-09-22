@@ -43,8 +43,15 @@ network:
   ethernets:
     enp7s0:
       dhcp4: true
+    br-a63d377b882b:
+      dhcp4: true
   wifis:
     wlp6s0b1:
+      dhcp4: true
+      access-points:
+        "CU_grN4_BK":
+          password: "ta9at4cd"
+    br-ba51bb7ba6eb:
       dhcp4: true
       access-points:
         "CU_grN4_BK":

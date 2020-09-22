@@ -82,8 +82,9 @@ tunnels:
 ### 启动客户端
 
 ```bash
-$ ngrok -config=ngrok.cfg start http https test app
-$ ngrok -config=ngrok.cfg start app
+./ngrok -config=ngrok.cfg start http https test app
+./ngrok -config=ngrok.cfg start app
+./ngrok -config=ngrok.cfg -subdomain=nginx01 8080
 ```
 
 ## let's Encrypt 加密证书实现 ssl

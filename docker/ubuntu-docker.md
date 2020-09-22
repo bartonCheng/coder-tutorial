@@ -51,7 +51,7 @@ WORKDIR /data
 ## 构建镜像
 
 ```bash
-docker build -t hwphp:7.4-fpm .
+docker build -t ysphp:7.4-fpm .
 ```
 
 ## 查看镜像
@@ -127,4 +127,22 @@ docker cp myphp:/home/data/test/js/test.js /opt
 docker cp 要拷贝的文件路径 容器名：要拷贝到容器里面对应的路径
 #如：
 docker cp /opt/test.js myphp:/home/data/test/js
+```
+
+## 将镜像维护到阿里云镜像服务
+
+- [阿里云镜像服务](https://cr.console.aliyun.com/cn-qingdao/instances/repositories)
+
+```bash
+# 登录阿里云
+sudo docker login --username=2020851948@qq.com registry.cn-qingdao.aliyuncs.com
+
+# 获取镜像id
+sudo docker images
+
+# 打标签
+sudo docker tag ea92701ebf26 registry.cn-qingdao.aliyuncs.com/bartoncheng/ysphp:1.0-release
+
+# 推送镜像到阿里云
+sudo docker push registry.cn-qingdao.aliyuncs.com/bartoncheng/ysphp:1.0-release
 ```
