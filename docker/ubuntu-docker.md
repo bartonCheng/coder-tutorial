@@ -146,3 +146,45 @@ sudo docker tag ea92701ebf26 registry.cn-qingdao.aliyuncs.com/bartoncheng/ysphp:
 # 推送镜像到阿里云
 sudo docker push registry.cn-qingdao.aliyuncs.com/bartoncheng/ysphp:1.0-release
 ```
+
+## 使用 docker 更新代码
+
+```bash
+# 删除原账户
+sudo userdel www-data
+
+# 新建账户，nginx的默认用户
+sudo useradd www-data
+
+# 账户设置密码
+sudo passwd www-data
+
+# 设置用户的组
+sudo usermod -G www-data www-data
+
+# 切换用户
+su www-data
+
+# 使用www-data进行代码的拉取
+# 防止宿主机和容器的用户不统一
+
+# 修改/etc/passwd /etc/group
+# www-data 的用户id为 33
+```
+
+## Docker 宿主机和容器的时间不一致
+
+```bash
+# 前两条是把默认的UTC 改为CST
+# 第三条是同步时间
+cp /usr/share/zoneinfo/GMT /etc/localtime
+ln -sf /usr/share/zoneinfo/Asia/Shanghai    /etc/localtime
+sudo ntpdate cn.pool.ntp.org
+
+# docker-compose.yml
+volumes:
+      - ./mariadb/db:/var/lib/mysql
+      - ./mariadb/conf.d:/etc/mysql/mariadb.conf.d
+      - ./mariadb/logs:/var/log/mysql
+      - /etc/localtime:/etc/localtime:ro //这里使用宿主机的时间
+```
