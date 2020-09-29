@@ -11,6 +11,15 @@
 
 ---
 
+<!-- python编程开发 -->
+
+- [PHP 系列](php/README.md)
+  - [微擎框架开发](./php/weiqing-php.md)
+  - [微信小程序](./php/weiqing-php.md)
+  - [Swoole 开发手册](./php/swoole-php.md)
+
+---
+
 <!-- nginx 系列 -->
 
 - [Nginx 系列](nginx/README.md)
