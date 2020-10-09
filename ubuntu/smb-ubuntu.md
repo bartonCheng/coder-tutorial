@@ -9,8 +9,36 @@
 ## 安装 Samba
 
 ```bash
+# 安装
+sudo apt install samba
+
+# 查看版本
+samba -V
+
+# 设置samba
+cd /etc/samba/
+sudo cp smb.conf smb.conf.bak
+sudo vim smb.conf
+
+# 添加内容
+[global]
+security = user
+[share]
+   browseable = yes
+   path = /home/dk/share
+   valid users = dk
+   public = yes
+   available = yes
+
 # 启动服务
 sudo service smbd start
+
+# 设置用户密码
+sudo smbpasswd -a dk
+# 密码
+
+# 打开mac文件
+# 使用 command + K
 ```
 
 ## 设置 ufw
