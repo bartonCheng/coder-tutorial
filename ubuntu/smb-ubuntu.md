@@ -37,6 +37,11 @@ sudo service smbd start
 sudo smbpasswd -a dk
 # 密码
 
+# 新建share文件夹
+
+mkdir /home/dk/share
+chmod 755 -R share
+
 # 打开mac文件
 # 使用 command + K
 ```
