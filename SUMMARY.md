@@ -11,12 +11,13 @@
 
 ---
 
-<!-- python编程开发 -->
+<!-- php编程开发 -->
 
 - [PHP 系列](php/README.md)
   - [微擎框架开发](./php/weiqing-php.md)
   - [微信小程序](./php/weiqing-php.md)
   - [Swoole 开发手册](./php/swoole-php.md)
+  - [phpstorm IDE 设置](./php/phpstorm-dev.md)
 
 ---
 
