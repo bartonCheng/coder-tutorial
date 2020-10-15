@@ -89,4 +89,6 @@ xdebug.idekey = "PHPSTORM"
 ### 配置 phpstorm
 
 - 点击右上角 添加配置项
-  ![img](../assets/01.png)
+  ![img](http://files.whbaqn.com/01.png)
+- 添加调试服务器
+  ![img](http://files.whbaqn.com/02.png)
