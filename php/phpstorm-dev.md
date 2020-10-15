@@ -5,11 +5,11 @@
 ## 安装 【mac win 通用】
 
 - [下载 2020.2 版本](https://www.jetbrains.com/phpstorm/download/other.html)
-- [破解补丁]()
 
 ### 修改验证 host
 
 ```bash
+# 链接: https://pan.baidu.com/s/1GGPFxN501H8xJW9ZU8RvfQ  密码: 2ae0
 sudo vim /etc/hosts
 
 # 添加以下内容
