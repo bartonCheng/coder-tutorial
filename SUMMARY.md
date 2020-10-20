@@ -18,6 +18,7 @@
   - [微信小程序](./php/weiqing-php.md)
   - [Swoole 开发手册](./php/swoole-php.md)
   - [phpstorm IDE 设置](./php/phpstorm-dev.md)
+  - [thinkphp 开发手册](./php/thinkphp/book-dev.md)
 
 ---
 
