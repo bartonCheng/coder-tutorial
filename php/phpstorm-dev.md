@@ -9,6 +9,7 @@
 ### 修改验证 host
 
 ```bash
+# 工具地址
 # 链接: https://pan.baidu.com/s/1GGPFxN501H8xJW9ZU8RvfQ  密码: 2ae0
 sudo vim /etc/hosts
 
