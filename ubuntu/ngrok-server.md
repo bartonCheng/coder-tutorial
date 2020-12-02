@@ -25,12 +25,19 @@
 apt update
 apt -y upgrade
 apt install git
+# 配置 git的安全下载
+# ssh-keygen -t rsa -C "dkkevincheng@gmail.com"
+# cat /root/.ssh/id_rsa.pub
 git clone git@github.com:bartonCheng/ngrokd-server.git
 cd ngrokd-server/
 sh ngrokd-ubuntu.sh
-全新安装
-生成客户端
-启动服务即可
+# 如果卡住，刷新下服务文件
+# source /etc/profile
+
+# 启动服务端
+./ngrok/bin/ngrokd -domain="whbaqn.com" -tunnelAddr=":3399"
+# 启动客户端
+./ngrok/bin/ngrok -config=ngrok.cfg start app
 ```
 
 ### ngrok 后台运行
@@ -101,7 +108,7 @@ apt install certbot
 ### 验证
 
 ```bash
-certbot certonly -d 'ceshi.whbaqn.com' -d '*.ceshi.whbaqn.com' --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory
+certbot certonly -d 'whbaqn.com' -d '*.whbaqn.com' --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory
 ```
 
 ### 配置解析
@@ -120,7 +127,8 @@ crontab -e
 ### ngrok 服务端的配置
 
 ```bash
-./ngrokd -domain="ceshi.whbaqn.com" -tunnelAddr=":3399" -tlsKey="/etc/letsencrypt/live/ceshi.whbaqn.com/privkey.pem" -tlsCrt="/etc/letsencrypt/live/ceshi.whbaqn.com/fullchain.pem"
+./ngrok/bin/ngrokd -domain="ceshi.whbaqn.com" -tunnelAddr=":3399" -tlsKey="/etc/letsencrypt/live/whbaqn.com/privkey.pem" -tlsCrt="/etc/letsencrypt/live/whbaqn.com/fullchain.pem"
+
 ```
 
 ## 使用 ufw 防火墙
